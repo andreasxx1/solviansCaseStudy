@@ -1,0 +1,25 @@
+<div>
+	<ul class="user-selection-list" ng-repeat="user in family | orderBy:'id'">
+		<li ng-dblclick="user.collapse()"
+			ng-click="user.controllerScope.setSelectedUser(user)"
+			class="ng-class: user.controllerScope.selectedUser.id === user.id ? 'selected' : ''"
+			tabindex="-1"> <!-- tabindex='-1' added to be able to use the ng-blur listener inside the li element -->
+			<span class="glyphicon glyphicon-triangle-right padding-left-10px" 
+				  ng-show="!user.isCollapsed"
+				  ng-click="user.collapse()"></span>
+			<span class="glyphicon glyphicon-triangle-bottom padding-left-10px" 
+			      ng-show="user.isCollapsed"
+			      ng-click="user.collapse()"></span>
+			<span style="padding-left: {{level*15}}px">{{user.fullName}}</span>
+			<span class="glyphicon glyphicon-plus padding-top-7px" 
+				  ng-show="user.controllerScope.newUser.parentId !== user.id"
+				  ng-click="user.controllerScope.updateCurrentAddition(user.id)"></span>
+			<span class="glyphicon glyphicon-remove padding-top-7px"
+			      ng-show="user.controllerScope.newUser.parentId === user.id"
+			      ng-click="user.controllerScope.updateCurrentAddition()"></span> 
+		</li>
+		<li ng-show="user.isCollapsed">
+			<tree family="user.children" level="level"></tree>
+		</li>
+	</ul>
+</div>

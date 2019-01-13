@@ -5,7 +5,8 @@
   "author": "Andreas Brandt",
   "license": "ISC",
   "scripts": {
-    "start": "./npm_exec nodemon server.js"
+    "start": "./npm_exec nodemon server.js",
+    "build": "npm install && ./npm_exec bower install"
   },
   "dependencies": {
     "angular-bootstrap": "^0.12.2",

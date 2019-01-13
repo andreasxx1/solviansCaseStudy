@@ -37,21 +37,18 @@
 			function getUsers() {
 				commands.getUsers()
 				.then(users => {
-					$scope.userTree = [];
-					$scope.users = users.map(user => {
-						// Getting first tree level
+					$scope.userTree = [];$scope.users = users;
+					$scope.users.forEach(user => {
+						user.isCollapsed = false;
+						user.collapse = function() { this.isCollapsed = !this.isCollapsed };
+						user.controllerScope = $scope; // Hack to have access the controller scope reference from inside the recursive tree directive.
 						if (!user.parentId) {
 							$scope.userTree.push(user);
 						} 
-						// Extending retreived users
-						return Object.assign({ 
-							isCollapsed: false,
-							collapse: function() { this.isCollapsed = !this.isCollapsed }
-						}, user);
-					})
+					});
 				})
 				.then(() => {
-					// Forcing setSelectedUser to get the correct reference and update the number of childrens after addition (reference's lost on users reload);
+					// Forcing setSelectedUser to get the correct reference and update the number of children after addition (reference's lost on users reload);
 					if ($scope.selectedUser) {
 						$scope.setSelectedUser($scope.getUserById($scope.selectedUser.id));
 					}
@@ -86,7 +83,7 @@
 				$scope.users.map(u1 => {
 					if (u1.parentId) {
 						$scope.users.some(u2 => {
-							return u2.id === u1.parentId ? u2.childrens.push(u1) && true : false; // Shortcircuiting for skill display... (not the best option when team working I think :D)
+							return u2.id === u1.parentId ? u2.children.push(u1) : false;
 						});
 					}
 				});
@@ -95,7 +92,7 @@
 			function updateCurrentAddition(parentId) {
 				$scope.newUser = { 
 					parentId, 
-					childrens: [],
+					children: [],
 					id: $scope.users.length + 1, 
 					get fullName() { return this.firstName + ' ' + this.lastName }
 				}

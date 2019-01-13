@@ -1,4 +1,4 @@
-<div class="module-container">
+<div class="module-container" ng-cloak>
 	<!-- User tree -->
 	<div class="container">
 		<div class="container-header">
@@ -10,26 +10,9 @@
 				  ng-show="isAdding"
 			      ng-click="updateCurrentAddition()"></span> 
 		</div>
-		<div class="container-body">
+		<div class="container-body" ng-disabled="!users.length">
 			<div>
-				<ul class="user-selection-list">
-					<li ng-repeat="user in users | orderBy:'id'" 
-						ng-click="setSelectedUser(user)"
-						ng-dblclick="user.collapse()"
-						class="ng-class: selectedUser.id === user.id ? 'selected' : ''" 
-						tabindex="-1"> 
-						<!-- tabindex='-1' added to be able to use the ng-blur listener inside the li element -->
-						<span class="glyphicon glyphicon-triangle-right" ng-show="!user.isCollapsed" ng-click="user.collapse()"></span>
-						<span class="glyphicon glyphicon-triangle-bottom" ng-show="user.isCollapsed" ng-click="user.collapse()"></span>
-						<span>{{user.fullName}}</span>
-						<span class="glyphicon glyphicon-plus" 
-							  ng-show="newUser.parentId !== user.id"
-							  ng-click="updateCurrentAddition(user.id)"></span>
-						<span class="glyphicon glyphicon-remove" 
-						      ng-show="newUser.parentId === user.id"
-						      ng-click="updateCurrentAddition()"></span> 
-					</li>
-				</ul>
+				<tree family="userTree" level=0></tree>
 			</div>
 		</div>
 	</div>
@@ -48,7 +31,7 @@
 				<li><b>Date of Birth:</b> {{selectedUser.birthdate}}</li>
 				<li><b>Email:</b> {{selectedUser.email}}</li>
 				<li><b>Parent:</b> {{getUserById(selectedUser.parentId).fullName || '-'}}</li> 
-				<li><b>Number of childrens:</b> {{selectedUser.childrens.length}}</li>
+				<li><b>Number of children:</b> {{selectedUser.children.length}}</li>
 			</ul>
 		</div>
 	</div>
@@ -62,7 +45,6 @@
 				<span>First Name:</span>
 				<!-- ng-show added in order to force the focusOnShow directive to be triggered -->
 				<input focus-on-show 
-					   next-on-enter
 					   ng-show="isAdding"
 					   ng-model="newUser.firstName"
 					   ng-change="isWarning.firstName = false"
@@ -70,22 +52,19 @@
 			</div>
 			<div>
 				<span>Last Name:</span>
-				<input next-on-enter 
-					   ng-model="newUser.lastName"
+				<input ng-model="newUser.lastName"
 					   ng-change="isWarning.lastName = false"
 					   class="ng-class: isWarning.lastName ? 'input-warning' : ''"></input>
 			</div>
 			<div>
 				<span>Birth Date:</span>
-				<input next-on-enter
-					   ng-model="newUser.birthdate"
+				<input ng-model="newUser.birthdate"
 					   ng-change="isWarning.birthdate = false"
 					   class="ng-class: isWarning.birthdate ? 'input-warning' : ''"></input>
 			</div>
 			<div>
 				<span>Email:</span>
-				<input next-on-enter 
-					   ng-model="newUser.email"
+				<input ng-model="newUser.email"
 					   ng-change="isWarning.email = false"
 					   class="ng-class: isWarning.email ? 'input-warning' : ''"></input>
 			</div>

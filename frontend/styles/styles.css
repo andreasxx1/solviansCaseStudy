@@ -81,8 +81,7 @@ div[disabled] {
 }
 
 .user-selection-list li {
-	padding: 15px 10px; 
-	margin: 0;
+	line-height: 35px;
 }
 
 .user-selection-list li:not(:last-child) {
@@ -126,4 +125,12 @@ div[disabled] {
 	margin: 15px 20px; 
 	font-weight: bold; 
 	font-size: 17px;
+}
+
+.padding-left-10px {
+	padding-left: 10px;
+}
+
+.padding-top-7px {
+	padding-top: 7px !important;
 }
