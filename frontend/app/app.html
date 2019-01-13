@@ -23,10 +23,10 @@
 						<span class="glyphicon glyphicon-triangle-bottom" ng-show="user.isCollapsed" ng-click="user.collapse()"></span>
 						<span>{{user.fullName}}</span>
 						<span class="glyphicon glyphicon-plus" 
-							  ng-show="newUser.parent !== user.fullName"
+							  ng-show="newUser.parentId !== user.id"
 							  ng-click="updateCurrentAddition(user.id)"></span>
 						<span class="glyphicon glyphicon-remove" 
-						      ng-show="newUser.parent === user.fullName"
+						      ng-show="newUser.parentId === user.id"
 						      ng-click="updateCurrentAddition()"></span> 
 					</li>
 				</ul>
@@ -39,7 +39,7 @@
 			<span>User details</span>
 		</div>
 		<div class="container-body">
-			<div ng-show="!selectedUser" class="no-selected-user-label">
+			<div class="no-selected-user-label" ng-show="!selectedUser">
 				<span>No selected user</span>
 			</div>
 			<ul class="user-details-list" ng-if="selectedUser">
@@ -47,7 +47,7 @@
 				<li><b>Full Name:</b> {{selectedUser.fullName}}</li>
 				<li><b>Date of Birth:</b> {{selectedUser.birthdate}}</li>
 				<li><b>Email:</b> {{selectedUser.email}}</li>
-				<li><b>Parent:</b> {{getParentById(selectedUser.id).fullName || '-'}}</li> 
+				<li><b>Parent:</b> {{getUserById(selectedUser.parentId).fullName || '-'}}</li> 
 				<li><b>Number of childrens:</b> {{selectedUser.childrens.length}}</li>
 			</ul>
 		</div>
@@ -89,9 +89,9 @@
 					   ng-change="isWarning.email = false"
 					   class="ng-class: isWarning.email ? 'input-warning' : ''"></input>
 			</div>
-			<div ng-show="newUser.parent !== 'none'">
+			<div ng-show="newUser.parentId > 0">
 				<span>Parent:</span>
-				<input ng-model="newUser.parent" class="disabled" disabled></input>
+				<input value="{{getUserById(newUser.parentId).fullName || '-'}}" class="disabled" disabled></input>
 			</div>
 			<div class="adding-buttons-container">
 				<button class="btn btn-default" ng-click="createUser()">ADD</button>

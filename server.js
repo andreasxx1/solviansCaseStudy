@@ -28,8 +28,6 @@
 
     //////////
 
-    // Could be separated in another module
-
     function getUsers() {
     	return dispatch({ method: 'GET', url: '/users' });
     }
