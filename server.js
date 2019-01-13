@@ -40,7 +40,7 @@
             .then(res => {
                 resolve(res.getBody());
             });
-        })
+        });
     }
 
     function getUsers() {
