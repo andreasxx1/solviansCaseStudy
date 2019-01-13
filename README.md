@@ -2,7 +2,7 @@
 
 ## Installing / Getting started
 
-Minimal node version needed: v7.10.1
+Minimal node version needed to run the backend v7.10.1
 
 To install:
 ```shell
@@ -14,4 +14,4 @@ To start app:
 npm run start
 ```
 
-To visualize it in the browser -> url: http://localhost:5000
+To visualize it once running: http://localhost:5000
