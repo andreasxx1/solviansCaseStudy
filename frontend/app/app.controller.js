@@ -37,7 +37,8 @@
 			function getUsers() {
 				commands.getUsers()
 				.then(users => {
-					$scope.userTree = [];$scope.users = users;
+					$scope.userTree = [];
+					$scope.users = users;
 					$scope.users.forEach(user => {
 						user.isCollapsed = false;
 						user.collapse = function() { this.isCollapsed = !this.isCollapsed };

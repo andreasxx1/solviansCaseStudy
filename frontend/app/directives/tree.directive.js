@@ -7,10 +7,7 @@
 			return {
 			    restrict: "E",
 			    scope: { family: '=', level: '=' },
-			    templateUrl: 'app/directives/tree.html',
-			    link: function(scope, elm, attr) {
-			    	scope.level++;
-			    }
+			    templateUrl: 'app/directives/tree.html'
 			};
 		});
 
