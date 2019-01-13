@@ -52,9 +52,12 @@
     }
 
     function setDummyUsers() {
-        return (dummyUsers.map(user => new Promise(resolve => {
-            return dispatch({ method: 'POST', url: '/users', data: user });
-        }))).all();
+        return Promise.all(dummyUsers.map(user => {
+            return setUsers(user);
+        }))
+        .then(() => {
+            return getUsers();
+        });
     }
 
 })();
