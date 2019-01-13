@@ -4,6 +4,9 @@ ul {
 
 li {
 	outline:0;
+    white-space: nowrap;
+    overflow-x: auto;
+    position: relative;
 }
 
 li, 
@@ -133,4 +136,11 @@ div[disabled] {
 
 .padding-top-7px {
 	padding-top: 7px !important;
+}
+
+.absolute-icon {
+    display: block;
+    position: absolute;
+    margin-left: 323px;
+    margin-top: 3px;
 }
