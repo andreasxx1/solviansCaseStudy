@@ -90,14 +90,14 @@
 				});
 			}
 
-			function updateCurrentAddition(parentId) {
+			function updateCurrentAddition(parentId, isParent) {
 				$scope.newUser = { 
-					parentId, 
+					parentId: isParent || parentId, 
 					children: [],
 					id: $scope.users.length + 1, 
 					get fullName() { return this.firstName + ' ' + this.lastName }
 				}
-				$scope.isAdding = typeof parentId === 'number';
+				$scope.isAdding = typeof (isParent || parentId) === 'number';
 				$scope.isSaving = false;
 				$scope.isWarning = { firstName: false, lastName: false, birthdate: false, email: false };
 			}

@@ -85,9 +85,6 @@ div[disabled] {
 
 .user-selection-list li {
 	line-height: 35px;
-}
-
-.user-selection-list li:not(:last-child) {
 	border-bottom: 1px solid #DDD;
 }
 

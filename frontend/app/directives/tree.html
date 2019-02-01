@@ -4,25 +4,17 @@
 			ng-click="user.controllerScope.setSelectedUser(user)"
 			class="ng-class: user.controllerScope.selectedUser.id === user.id ? 'selected' : ''"
 			tabindex="-1"> <!-- tabindex='-1' added to be able to use the ng-blur listener inside the li element -->
-			<span class="glyphicon glyphicon-triangle-right padding-left-10px"
+
+			<span class="glyphicon {{user.isCollapsed ? 'glyphicon-triangle-bottom' : 'glyphicon-triangle-right '}} padding-left-10px"
 				  style="padding-left: {{level*15}}px" 
-				  ng-show="!user.isCollapsed"
 				  ng-click="user.collapse()"></span>
-			<span class="glyphicon glyphicon-triangle-bottom padding-left-10px" 
-				  style="padding-left: {{level*15}}px"
-			      ng-show="user.isCollapsed"
-			      ng-click="user.collapse()"></span>
 			
 			<span>{{user.firstName}}</span>
 
-			<span class="glyphicon glyphicon-plus padding-top-7px absolute-icon" 
-				  ng-show="user.controllerScope.newUser.parentId !== user.id"
-				  ng-click="user.controllerScope.updateCurrentAddition(user.id)"></span>
-			<span class="glyphicon glyphicon-remove padding-top-7px absolute-icon"
-			      ng-show="user.controllerScope.newUser.parentId === user.id"
-			      ng-click="user.controllerScope.updateCurrentAddition()"></span>
+			<span class="glyphicon {{ user.controllerScope.newUser.parentId === user.id ? 'glyphicon-remove' : 'glyphicon-plus'}} padding-top-7px absolute-icon"
+				  ng-click="user.controllerScope.updateCurrentAddition(user.id, user.controllerScope.newUser.parentId === user.id)"></span>
 		</li>
-		<li ng-show="user.isCollapsed">
+		<li ng-if="user.isCollapsed">
 			<tree family="user.children" level=level+1></tree>
 		</li>
 	</ul>

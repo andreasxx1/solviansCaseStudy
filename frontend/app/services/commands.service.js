@@ -16,7 +16,6 @@
         	//////////
 
 			function dispatch({ method, url, data }) {
-				// Using $q service instead of ES6 promise to avoid using $scope.$apply after each promise resolve
 				return $q(resolve => { 
 					$http({ method, url, data }).then(res => {
 						resolve(res.data);
